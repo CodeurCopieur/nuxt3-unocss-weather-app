@@ -1,5 +1,6 @@
 <template>
-  <div class="w-full h-auto relative flex items-center justify-center sm:h-screen">
+  <div class="flex flex-col min-h-screen bg-weather-primary">
+    <SiteNavigation />
     <NuxtPage />
   </div>
 </template>
