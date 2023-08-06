@@ -9,7 +9,7 @@
 </script>
 <template>
   <teleport to='body'>
-    <Transition name="modal-outer">
+    <transition name="modal-outer">
       <div 
         v-show="modalActive"
         class="flex justify-center absolute w-full bg-black bg-opacity-30 h-screen top-0 left-0 px-8">
@@ -24,7 +24,7 @@
           </div>
         </transition>
       </div>
-    </Transition>
+    </transition>
   </teleport>
 </template>
 <style scoped>
