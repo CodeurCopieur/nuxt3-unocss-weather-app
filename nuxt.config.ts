@@ -14,8 +14,9 @@ export default defineNuxtConfig({
     theme: {
       // ...
       colors: {
-        "weather-primary": "#00668A",
+        "weather-primary": "#0ea5e9",
         "weather-secondary": "#004E71",
+        "weather-tertiary": "#f43f5e",
       },
       fontFamily: {
         Roboto: ['Roboto']
