@@ -5,7 +5,7 @@
   };
 </script>
 <template>
- <header class="sticky top-0 bg-weather-primary shadow-lg">
+ <header class="sticky top-0 bg-weather-tertiary shadow-lg">
     <nav class="container mx-auto flex flex-col sm:flex-row items-center gap-4 text-white py-6">
 
     <NuxtLink to="/">
