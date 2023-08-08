@@ -1,5 +1,11 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
+  runtimeConfig: {
+    public: {
+      baseUrl: "https://api.mapbox.com/geocoding/v5/mapbox.places/",
+      currencyKey: process.env.CURRENCY_API_KEY || process.env.API_KEY,
+    }
+  },
   modules: ['@unocss/nuxt','nuxt-icon'],
   unocss: {
     uno: true,
