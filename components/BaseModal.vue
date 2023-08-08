@@ -12,7 +12,7 @@
     <transition name="modal-outer">
       <div 
         v-show="modalActive"
-        class="flex justify-center absolute w-full bg-black bg-opacity-30 h-screen top-0 left-0 px-8">
+        class="flex justify-center absolute w-full bg-black bg-opacity-30 h-screen top-0 left-0 px-8 z-50">
         <transition  name="modal-inner">
           <div 
           v-if="modalActive"
