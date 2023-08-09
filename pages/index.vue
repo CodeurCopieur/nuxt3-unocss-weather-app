@@ -11,16 +11,21 @@
     event.preventDefault();
     
     try{
-      state.allItems = await useWeatherApi().getSearchResults(state.searchQuery)
+      if (!state.searchQuery) {
+        state.allItems = []
+        state.visible = true
+        return
+      } else {
+        state.allItems = await useWeatherApi().getSearchResults(state.searchQuery)
 
-      setTimeout(()=> {
-        const { data } = state.allItems;
-        const res = data.features;
-        state.searchResult = res
-        console.log('Résultats de la recherche :', state.searchResult);
-      }, 300)
+        setTimeout(()=> {
+          const { data } = state.allItems;
+          const res = data.features;
+          state.searchResult = res
+        }, 300)
 
-      
+        state.visible = false
+      }
     } catch (error) {
       console.error('Erreur lors de la recherche :', error);
     }
@@ -28,17 +33,6 @@
 
     // state.searchQuery = ''
 
-    if (!state.searchQuery) {
-      state.allItems = []
-      return
-    }
-
-    if (state.allItems.length === 0) {
-      // Afficher un message approprié ici
-      state.visible = true
-    } else {
-      state.visible = false
-    }
   }
 
 </script>
@@ -62,8 +56,8 @@
         </ul>
     </form>
 
-    <div v-if="state.visible" class="container max-w-xs mx-auto bg-red-100 border border-red-400 text-red-700 px-4 py-3 relative mt-4 text-center" role="alert">
-      <p>Aucun résultat trouvé.</p>
+    <div v-if="state.visible" class="container mx-auto bg-red-100 border border-weather-tertiary text-weather-tertiary px-4 py-3 relative mt-4 text-center" role="alert">
+      <p>Désolé, quelque chose s'est mal passé, veuillez réessayer</p>
     </div>
   </main>
 </template>
