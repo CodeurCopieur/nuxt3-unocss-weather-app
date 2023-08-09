@@ -2,21 +2,38 @@
 
   const state = reactive({
     searchQuery: '',
-    queryTimeout: null,
     searchResult: null,
-    allItems: []
+    allItems: [],
+    visible: false
   })
 
   async function handleBlur(event) {
     event.preventDefault();
     
-    state.allItems = await useWeatherApi().getSearchResults(state.queryTimeout, state.searchQuery)
+    try{
+      state.allItems = await useWeatherApi().getSearchResults(state.searchQuery)
 
-    state.searchQuery = ''
+      const { data } = state.allItems;
+      const res = data.features;
+
+      console.log('Résultats de la recherche :', res);
+    } catch (error) {
+      console.error('Erreur lors de la recherche :', error);
+    }
+    
+
+    // state.searchQuery = ''
 
     if (!state.searchQuery) {
       state.allItems = []
       return
+    }
+
+    if (state.allItems.length === 0) {
+      // Afficher un message approprié ici
+      state.visible = true
+    } else {
+      state.visible = false
     }
   }
 
@@ -31,6 +48,10 @@
         placeholder="Rechercher une ville ou un état"
         class="py-4 px-1 w-full bg-transparent border-b focus:border-weather-secondary focus:outline-none focus:shadow-[0px_1px_0_0_#004E71]">
     </form>
+
+    <div v-if="state.visible" class="container max-w-xs mx-auto bg-red-100 border border-red-400 text-red-700 px-4 py-3 relative mt-4 text-center" role="alert">
+      <p>Aucun résultat trouvé.</p>
+    </div>
   </main>
 </template>
 
