@@ -8,16 +8,13 @@ export default () => {
 
   const state = reactive({res: null});
 
-  const getSearchResults = async(queryT, searchQ) => {
-    clearTimeout(queryT)
-    queryT = setTimeout( async()=> {
+  const getSearchResults = async(searchQ) => {
+
       if (searchQ !== "") {
         state.res = await axios.get(`${baseUrl}${searchQ}.json?access_token=${apiKey}`)
-        const { res } = state
 
-        return res.data
       }
-    }, 300)
+      return state.res
   }
   return {
     getSearchResults
