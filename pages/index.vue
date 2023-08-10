@@ -4,32 +4,38 @@
     searchQuery: '',
     searchResult: null,
     allItems: [],
-    visible: false
+    visible: null,
+    messageError: ''
   })
 
   async function handleBlur(event) {
     event.preventDefault();
     
-    try{
-      if (!state.searchQuery) {
+
+    if (state.searchQuery === '') {
         state.allItems = []
         state.visible = true
+        state.messageError = "Désolé, quelque chose s'est mal passé, veuillez réessayer"
+
         return
-      } else {
+      } else if(state.allItems !== []) {
         state.allItems = await useWeatherApi().getSearchResults(state.searchQuery)
 
-        setTimeout(()=> {
+        // setTimeout(()=> {
           const { data } = state.allItems;
           const res = data.features;
           state.searchResult = res
-        }, 300)
+        // }, 300)
 
         state.visible = false
       }
-    } catch (error) {
-      console.error('Erreur lors de la recherche :', error);
-    }
-    
+
+      if (state.allItems = []) {
+        state.visible = false
+        console.log(state.allItems = []);
+        state.messageError = "Aucun résultat ne correspond à votre requête, essayez un terme différent."
+      }
+
 
     // state.searchQuery = ''
 
@@ -56,8 +62,8 @@
         </ul>
     </form>
 
-    <div v-if="state.visible" class="container mx-auto bg-red-100 border border-weather-tertiary text-weather-tertiary px-4 py-3 relative mt-4 text-center" role="alert">
-      <p>Désolé, quelque chose s'est mal passé, veuillez réessayer</p>
+    <div v-if="state.visible  || state.visible === false && state.allItems.length ===0" class="container mx-auto bg-red-100 border border-weather-tertiary text-weather-tertiary px-4 py-3 relative mt-4 text-center" role="alert">
+      <p>{{ state.messageError }}</p>
     </div>
   </main>
 </template>
