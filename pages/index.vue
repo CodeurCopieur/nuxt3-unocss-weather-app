@@ -24,10 +24,14 @@
         state.allItems = await useWeatherApi().getSearchResults(state.searchQuery)
         const { data } = state.allItems;
         const res = data.features;
-        state.searchResult = res
-        state.messageError = ''
+        if (res) {
+          state.visible = true
+          state.searchResult = res
+          state.messageError = `${state.searchResult.length} resultat`
+        }
+        
 
-        if (state.allItems = []) {
+        if (res.length === 0) {
           state.visible = false
           state.messageError = "Aucun résultat ne correspond à votre requête, essayez un  terme différent."
         }
@@ -57,7 +61,7 @@
         </ul>
     </form>
 
-    <div v-if="state.visible === true  || state.visible === false && state.allItems.length === 0" class="container mx-auto bg-red-100 border border-weather-tertiary text-weather-tertiary px-4 py-3 relative mt-4 text-center" role="alert">
+    <div v-if="state.visible === true  || state.visible === false && state.searchResult.length === 0" class="container mx-auto bg-red-100 border border-weather-tertiary text-weather-tertiary px-4 py-3 relative mt-4 text-center" role="alert">
       <p>{{ state.messageError }}</p>
     </div>
   </main>
