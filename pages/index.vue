@@ -27,7 +27,7 @@
         if (res) {
           state.visible = true
           state.searchResult = res
-          state.messageError = `${state.searchResult.length} resultat`
+          state.messageError = `${state.searchResult.length} resultat${state.searchResult.length> 1 ? 's' : ''}`
         }
         
 
@@ -39,6 +39,10 @@
       }
 
   }
+
+  const previewCity = (city) => {
+    console.log(city);
+  };
 
 </script>
 <template>
@@ -53,10 +57,11 @@
 
         <ul 
           v-if="state.searchResult && state.searchResult.length"
-          class="absolute bg-weather-secondary text-white w-full shadow-md py-2 px-1 top-[66px] z-50">
+          class="bg-weather-secondary text-white w-full shadow-md py-2 px-1 top-[66px] z-50">
           <li 
             v-for="searchResult in state.searchResult" 
             :key="searchResult.id"
+            @click="previewCity(searchResult)"
             class="py-2 cursor-pointer"> {{ searchResult.place_name }}</li>
         </ul>
     </form>
