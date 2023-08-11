@@ -39,10 +39,14 @@
       }
 
   }
+const router = useRouter()
+const getWeatherPageRoute = (res) => {
+  const [city, state] = res.place_name.split(',')
 
-  const previewCity = (city) => {
-    console.log(city);
-  };
+  const decodedCity = decodeURIComponent(city.trim());
+  const decodedState = decodeURIComponent(state.trim());
+  return `/weather/${decodedCity.toLowerCase()}?lat=${res.geometry.coordinates[1]}&lng=${res.geometry.coordinates[0]}&preview=true`;
+};
 
 </script>
 <template>
@@ -61,8 +65,11 @@
           <li 
             v-for="searchResult in state.searchResult" 
             :key="searchResult.id"
-            @click="previewCity(searchResult)"
-            class="py-2 cursor-pointer"> {{ searchResult.place_name }}</li>
+            class="py-2 cursor-pointer">
+            <nuxt-link :to="getWeatherPageRoute(searchResult)">
+            {{ searchResult.place_name }}
+            </nuxt-link>
+          </li>
         </ul>
     </form>
 
