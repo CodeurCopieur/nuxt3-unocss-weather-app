@@ -39,7 +39,6 @@
       }
 
   }
-const router = useRouter()
 const getWeatherPageRoute = (res) => {
   const [city, state] = res.place_name.split(',')
 
