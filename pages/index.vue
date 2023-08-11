@@ -44,7 +44,7 @@ const getWeatherPageRoute = (res) => {
 
   const decodedCity = decodeURIComponent(city.trim());
   const decodedState = decodeURIComponent(state.trim());
-  return `/weather/${decodedCity.toLowerCase()}?lat=${res.geometry.coordinates[1]}&lng=${res.geometry.coordinates[0]}&preview=true`;
+  return `/weather/city=${decodedCity.toLowerCase()}?lat=${res.geometry.coordinates[1]}&lng=${res.geometry.coordinates[0]}&preview=true`;
 };
 
 </script>
