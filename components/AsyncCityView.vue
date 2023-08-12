@@ -6,7 +6,8 @@
     currentTime: null,
     temp: null,
     feelsLike: null,
-    description: null
+    description: null,
+    icon: null
   });
 
   const convertToCelsius  = (fahrenheit) => {
@@ -33,6 +34,7 @@
     state.temp = convertToCelsius(wData.data.current.temp);
     state.feelsLike = convertToCelsius(wData.data.current.feels_like);
     state.description = wData.data.current.weather[0].description;
+    state.icon = wData.data.current.weather[0].icon;
 
     return wData
   }
@@ -76,7 +78,6 @@
       <p class="text-8xl mb-8">
         {{ Math.round(state.temp) }}&deg;
       </p>
-      <div class="text-center">
         <p>
           Ressenti
           {{ Math.round(state.feelsLike) }}&deg;
@@ -84,7 +85,9 @@
         <p class="capitalize">
           {{ translateWeatherDescription(state.description)  }}
         </p>
-      </div>
+        <img 
+          class="w-[150px] h-auto"
+          :src="`http://openweathermap.org/img/wn/${state.icon}@2x.png`" alt="">
     </div>
   </div>
 </template>
