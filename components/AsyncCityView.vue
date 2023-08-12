@@ -4,15 +4,19 @@
   const {lat, lng} = route.query;
   const state = reactive({
     currentTime: null,
-    temp: null
+    temp: null,
+    feelsLike: null,
+    description: null
   });
 
   const convertToCelsius  = (fahrenheit) => {
     return (fahrenheit - 32) * 5 / 9;
    };
 
+   const { getWeatherData, translateWeatherDescription } = useWeatherApi()
+
   const getWeather = async() => {
-    const wData = await useWeatherApi().getWeatherData(lat, lng)
+    const wData = await getWeatherData(lat, lng)
 
     // cal current data & time
     const localOffset = new Date().getTimezoneOffset() * 60000
@@ -26,10 +30,9 @@
     })
 
     state.currentTime = wData.data.currentTime;
-
-    const currentTemperatureFahrenheit = wData.data.current.temp;
-    const currentTemperatureKelvin = convertToCelsius(currentTemperatureFahrenheit);
-    state.temp = currentTemperatureKelvin;
+    state.temp = convertToCelsius(wData.data.current.temp);
+    state.feelsLike = convertToCelsius(wData.data.current.feels_like);
+    state.description = wData.data.current.weather[0].description;
 
     return wData
   }
@@ -73,6 +76,15 @@
       <p class="text-8xl mb-8">
         {{ Math.round(state.temp) }}&deg;
       </p>
+      <div class="text-center">
+        <p>
+          Ressenti
+          {{ Math.round(state.feelsLike) }}&deg;
+        </p>
+        <p class="capitalize">
+          {{ translateWeatherDescription(state.description)  }}
+        </p>
+      </div>
     </div>
   </div>
 </template>
