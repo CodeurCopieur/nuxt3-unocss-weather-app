@@ -1,7 +1,7 @@
 <script setup>
-  const router = useRoute();
-  const {name} = router.params;
-  const {lat, lng} = router.query;
+  const route = useRoute();
+  const {name} = route.params;
+  const {lat, lng} = route.query;
 
   const getWeather = async() => {
     const wData = await useWeatherApi().getWeatherData(lat, lng)
@@ -16,7 +16,6 @@
       const utc = hour.dt * 1000 + localOffset;
       hour.currentTime = utc + 1000 * wData.data.timezone_offset;
     })
-    console.log(wData.data, localOffset, utc);
 
     return wData
   }
