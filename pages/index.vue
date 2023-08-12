@@ -65,9 +65,7 @@ const getWeatherPageRoute = (res) => {
             v-for="searchResult in state.searchResult" 
             :key="searchResult.id"
             class="py-2 cursor-pointer">
-            <nuxt-link class="block" :to="getWeatherPageRoute(searchResult)">
-            {{ searchResult.place_name }}
-            </nuxt-link>
+            <nuxt-link class="block" :to="getWeatherPageRoute(searchResult)">{{ searchResult.place_name }}</nuxt-link>
           </li>
         </ul>
     </form>
