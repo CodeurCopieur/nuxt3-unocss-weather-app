@@ -27,7 +27,7 @@ export default () => {
     }
   }
 
-  function translateWeatherDescription(description) {
+  const translateWeatherDescription = (description) => {
     switch (description) {
       case 'clear sky':
         return 'ciel dégagé';
