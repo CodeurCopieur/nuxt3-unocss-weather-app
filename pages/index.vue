@@ -49,7 +49,7 @@ const getWeatherPageRoute = (res) => {
 
 </script>
 <template>
-  <main class="container mx-auto text-white px-4">
+  <main class="container max-w-screen-lg max-w-screen-xl mx-auto text-white px-4">
     <form class="pt-4 mb-8 relative">
       <input 
         type="text" 
