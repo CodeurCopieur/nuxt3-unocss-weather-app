@@ -27,8 +27,48 @@ export default () => {
     }
   }
 
+  function translateWeatherDescription(description) {
+    switch (description) {
+      case 'clear sky':
+        return 'ciel dégagé';
+      case 'few clouds':
+        return 'quelques nuages';
+      case 'cloudy':
+        return 'nuageux';
+      case 'partly cloudy':
+        return 'partiellement nuageux';
+      case 'scattered clouds':
+        return 'nuages épars';
+      case 'overcast':
+        return 'couvert';
+      case 'light rain':
+        return 'pluie légère';
+      case 'moderate rain':
+        return 'pluie modérée';
+      case 'heavy rain':
+        return 'pluie forte';
+      case 'showers':
+        return 'averses';
+      case 'light snow':
+        return 'neige légère';
+      case 'moderate snow':
+        return 'neige modérée';
+      case 'heavy snow':
+        return 'neige forte';
+      case 'thunderstorms':
+        return 'orages';
+      case 'fog':
+        return 'brouillard';
+      case 'strong wind':
+        return 'vent fort';
+      default:
+        return description;
+    }
+  }
+
   return {
     getSearchResults,
-    getWeatherData
+    getWeatherData,
+    translateWeatherDescription
   }
 }
