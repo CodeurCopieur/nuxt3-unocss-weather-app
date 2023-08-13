@@ -7,7 +7,8 @@
     temp: null,
     feelsLike: null,
     description: null,
-    icon: null
+    icon: null,
+    hourly: null
   });
 
   const convertToCelsius  = (fahrenheit) => {
@@ -35,6 +36,7 @@
     state.feelsLike = convertToCelsius(wData.data.current.feels_like);
     state.description = wData.data.current.weather[0].description;
     state.icon = wData.data.current.weather[0].icon;
+    state.hourly = wData.data.hourly;
 
     return wData
   }
@@ -89,6 +91,39 @@
           class="w-[150px] h-auto"
           :src="`http://openweathermap.org/img/wn/${state.icon}@2x.png`" alt="">
     </div>
+
+    <hr class="border-white border-opacity-10 border w-full" />
+
+    <!-- Météo horaire -->
+    <div class="max-w-screen-md w-full py-12">
+      <div class="mx-8 text-white">
+        <h2 class="mb-4">Météo horaire</h2>
+        <div class="flex gap-10 overflow-x-scroll">
+          <div 
+            class="flex flex-col gap-4 items-center"
+            v-for="data in state.hourly" :key="data.dt">
+            <p class="whitespace-nowrap text-md">
+              {{ 
+                new Date(data.currentTime).toLocaleTimeString("fr-FR",
+                {
+                  hour: "numeric"
+                })
+              }}
+            </p>
+            <img 
+              class="h-[45px] w-auto object-cover"
+              :src="`http://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png`" alt="">
+            <p class="text-xl">
+              {{ Math.round(convertToCelsius(data.temp)) }}&deg;
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="border-white border-opacity-10 border w-full" />
+
+    
   </div>
 </template>
 
