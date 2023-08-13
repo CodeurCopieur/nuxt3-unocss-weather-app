@@ -6,7 +6,7 @@
 </script>
 <template>
  <header class="sticky top-0 bg-weather-tertiary shadow-lg">
-    <nav class="container mx-auto flex flex-col sm:flex-row items-center gap-4 text-white py-6">
+    <nav class="container max-w-screen-lg max-w-screen-xl mx-auto flex flex-col sm:flex-row items-center gap-4 text-white px-4 py-6">
 
     <NuxtLink to="/">
       <div class="flex items-center gap-3">
