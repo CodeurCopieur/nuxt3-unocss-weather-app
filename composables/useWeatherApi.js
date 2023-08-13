@@ -60,7 +60,82 @@ export default () => {
       case 'fog':
         return 'brouillard';
       case 'strong wind':
-        return 'vent fort';
+        return 'vent fort';case 'clear sky':
+        return 'ciel dégagé';
+      case 'few clouds':
+        return 'quelques nuages';
+      case 'scattered clouds':
+        return 'nuages épars';
+      case 'broken clouds':
+        return 'nuages fragmentés';
+      case 'overcast clouds':
+        return 'ciel couvert';
+      case 'mist':
+        return 'brume';
+      case 'smoke':
+        return 'fumée';
+      case 'haze':
+        return 'brume légère';
+      case 'sand':
+        return 'sable';
+      case 'dust':
+        return 'poussière';
+      case 'fog':
+        return 'brouillard';
+      case 'sand/ dust whirls':
+        return 'tourbillons de sable/poussière';
+      case 'squalls':
+        return 'rafales de vent';
+      case 'tornado':
+        return 'tornade';
+      case 'rain':
+        return 'pluie';
+      case 'light rain':
+        return 'pluie légère';
+      case 'moderate rain':
+        return 'pluie modérée';
+      case 'heavy intensity rain':
+        return 'pluie forte';
+      case 'very heavy rain':
+        return 'pluie très forte';
+      case 'extreme rain':
+        return 'pluie extrême';
+      case 'drizzle':
+        return 'bruine';
+      case 'freezing rain':
+        return 'pluie verglaçante';
+      case 'shower rain':
+        return 'averses de pluie';
+      case 'rain and snow':
+        return 'pluie et neige';
+      case 'snow':
+        return 'neige';
+      case 'light snow':
+        return 'neige légère';
+      case 'heavy snow':
+        return 'neige forte';
+      case 'sleet':
+        return 'grésil';
+      case 'shower sleet':
+        return 'averses de grésil';
+      case 'snow and rain':
+        return 'neige et pluie';
+      case 'shower snow':
+        return 'averses de neige';
+      case 'thunderstorm':
+        return 'orage';
+      case 'thunderstorm with light rain':
+        return 'orage avec pluie légère';
+      case 'thunderstorm with rain':
+        return 'orage avec pluie';
+      case 'thunderstorm with heavy rain':
+        return 'orage avec pluie forte';
+      case 'thunderstorm with light drizzle':
+        return 'orage avec bruine légère';
+      case 'thunderstorm with drizzle':
+        return 'orage avec bruine';
+      case 'thunderstorm with heavy drizzle':
+        return 'orage avec forte bruine';
       default:
         return description;
     }
