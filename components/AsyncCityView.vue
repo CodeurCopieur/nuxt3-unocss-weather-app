@@ -8,7 +8,8 @@
     feelsLike: null,
     description: null,
     icon: null,
-    hourly: null
+    hourly: null,
+    daily: null
   });
 
   const convertToCelsius  = (fahrenheit) => {
@@ -37,6 +38,7 @@
     state.description = wData.data.current.weather[0].description;
     state.icon = wData.data.current.weather[0].icon;
     state.hourly = wData.data.hourly;
+    state.daily = wData.data.daily;
 
     return wData
   }
@@ -123,7 +125,32 @@
 
     <hr class="border-white border-opacity-10 border w-full" />
 
-    
+    <!-- Météo hebdomadaire -->
+    <div class="max-w-screen-md w-full py-12">
+      <div class="mx-8 text-white">
+        <h2 class="mb-4">Prévisions à 7 jours</h2>
+        <div 
+          class="flex items-center"
+          v-for="day in state.daily" 
+          :key="day.dt">
+          <p class="flex-1">
+            {{ 
+              new Date(day.dt * 1000).toLocaleDateString("fr-FR",
+              {
+                weekday: "long",
+              })
+            }}
+          </p>
+          <img 
+              class="h-[50px] w-[50px] object-cover"
+              :src="`http://openweathermap.org/img/wn/${day.weather[0].icon}@2x.png`" alt= />
+          <div class="flex gap-2 flex-1 justify-end">
+            <p>H: {{ Math.round(convertToCelsius(day.temp.max)) }}</p>
+            <p>B: {{ Math.round(convertToCelsius(day.temp.min)) }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
