@@ -70,7 +70,9 @@ const getWeatherPageRoute = (res) => {
         </ul>
     </form>
 
-    <div v-if="state.visible === true  || state.visible === false && state.searchResult.length === 0" class="container mx-auto bg-red-100 border border-weather-tertiary text-weather-tertiary px-4 py-3 relative mt-4 text-center" role="alert">
+    <div 
+      v-if="state.visible === true  || state.visible === false && state.searchResult.length === 0" 
+      class="container mx-auto bg-red-100 border border-weather-tertiary text-weather-tertiary px-4 py-3 relative mt-4 text-center" role="alert">
       <p>{{ state.messageError }}</p>
     </div>
   </main>

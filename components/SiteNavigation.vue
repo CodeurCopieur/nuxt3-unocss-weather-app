@@ -1,7 +1,36 @@
 <script setup>
+  import {uid} from 'uid'
+  const route = useRoute();
+  const router = useRouter();
+
+  const savedCities = ref([])
+
   const modalActive = ref(null);
   const toggleModal = () => {
     modalActive.value = !modalActive.value
+  };
+
+  const addCity = () => {
+    if(localStorage.getItem('saveCities')) {
+      savedCities.value = JSON.parse(localStorage.getItem('saveCities'))
+    }
+    
+    const locationObj = {
+      id: uid(),
+      state: route.params.state,
+      name: route.params.name,
+      coords: {
+        lat: route.query.lat,
+        lng: route.query.lng
+      }
+    }
+
+    savedCities.value.push(locationObj)
+    localStorage.setItem('saveCities',JSON.stringify(savedCities.value))
+
+    let query = Object.assign({}, route.query)
+    delete query.preview;
+    router.replace({query})
   };
 </script>
 <template>
@@ -23,6 +52,8 @@
         class="text-xl hover:text-weather-secondary duration-150 cursor-pointer"
         @click="toggleModal" />
       <Icon 
+        v-if="route.query.preview"
+        @click="addCity"
         name="material-symbols:add" 
         class="text-xl hover:text-weather-secondary duration-150 cursor-pointer" />
     </div>
