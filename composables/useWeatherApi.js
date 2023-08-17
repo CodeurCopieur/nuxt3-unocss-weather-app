@@ -8,7 +8,7 @@ export default () => {
   const apiKey = config.public.currencyKey;
   const apiKey2 = config.public.currencyKey2;
 
-  const state = reactive({res: null});
+  const state = reactive({res: null, weatherData: null });
 
   const getSearchResults = async(searchQ) => {
       if (searchQ !== "") {
@@ -17,11 +17,18 @@ export default () => {
       return state.res
   }
 
-  const getWeatherData = async(lat, lng) => {
+  const getWeatherData = async(lat, lng, word) => {
     try {
-      const weatherData = await axios.get(`${baseUrl2}?lat=${lat}&lon=${lng}&exclude={part}&appid=${apiKey2}&units=imperial`)
 
-      return weatherData
+      if (word === 'onecall') {
+        state.weatherData = await axios.get(`${baseUrl2+word}?lat=${lat}&lon=${lng}&exclude={part}&appid=${apiKey2}&units=imperial`)
+
+      } else if(word === 'weather') {
+        state.weatherData = await axios.get(`${baseUrl2+word}?lat=${lat}&lon=${lng}&appid=${apiKey2}&units=imperial`)
+      }
+      
+      return state.weatherData
+
     } catch (error) {
       console.log(error);
     }
@@ -141,9 +148,14 @@ export default () => {
     }
   }
 
+  const convertToCelsius  = (fahrenheit) => {
+    return (fahrenheit - 32) * 5 / 9;
+   };
+
   return {
     getSearchResults,
     getWeatherData,
-    translateWeatherDescription
+    translateWeatherDescription,
+    convertToCelsius
   }
 }
