@@ -12,14 +12,10 @@
     daily: null
   });
 
-  const convertToCelsius  = (fahrenheit) => {
-    return (fahrenheit - 32) * 5 / 9;
-   };
-
-   const { getWeatherData, translateWeatherDescription } = useWeatherApi()
+   const { getWeatherData, translateWeatherDescription, convertToCelsius } = useWeatherApi()
 
   const getWeather = async() => {
-    const wData = await getWeatherData(lat, lng)
+    const wData = await getWeatherData(lat, lng, 'onecall')
 
     // cal current data & time
     const localOffset = new Date().getTimezoneOffset() * 60000
