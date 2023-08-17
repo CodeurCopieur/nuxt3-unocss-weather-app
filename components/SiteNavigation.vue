@@ -12,7 +12,7 @@
 
   const addCity = () => {
     if(localStorage.getItem('saveCities')) {
-      savedCities.value = JSON.parse(localStorage.getItem('saveCities'))
+      savedCities.value = JSON.parse(localStorage.getItem('savedCities'))
     }
     
     const locationObj = {
@@ -26,7 +26,7 @@
     }
 
     savedCities.value.push(locationObj)
-    localStorage.setItem('saveCities',JSON.stringify(savedCities.value))
+    localStorage.setItem('savedCities',JSON.stringify(savedCities.value))
 
     let query = Object.assign({}, route.query)
     delete query.preview;
