@@ -50,7 +50,7 @@ const getWeatherPageRoute = (res) => {
 </script>
 <template>
   <main class="container max-w-screen-lg max-w-screen-xl mx-auto text-white px-4">
-    <form class="pt-4 mb-8 relative">
+    <form class="py-4 relative">
       <input 
         type="text" 
         v-model="state.searchQuery"
@@ -72,8 +72,17 @@ const getWeatherPageRoute = (res) => {
 
     <div 
       v-if="state.visible === true  || state.visible === false && state.searchResult.length === 0" 
-      class="container mx-auto bg-red-100 border border-weather-tertiary text-weather-tertiary px-4 py-3 relative mt-4 text-center" role="alert">
+      class="container mx-auto bg-red-100 border border-weather-tertiary text-weather-tertiary px-4 py-2 relative my-4 text-center" role="alert">
       <p>{{ state.messageError }}</p>
+    </div>
+
+    <div class="flex flex-col gap-4">
+      <Suspense>
+        <CityList />
+        <template #fallback>
+          <p>Chargement...</p>
+        </template>
+      </Suspense>
     </div>
   </main>
 </template>
