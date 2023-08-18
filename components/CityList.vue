@@ -1,10 +1,7 @@
 <script setup>
   const state = reactive({
     savedCities: [],
-    weatherData: null,
-    data: {
-
-    }
+    weatherData: null
   })
 
   const { getWeatherData } = useWeatherApi()
@@ -18,9 +15,14 @@
       state.savedCities.forEach( city => {
         requests.push(getWeatherData(city.coords.lat, city.coords.lng, 'weather'))
       })
+
       state.weatherData = await Promise.all(requests)
       state.weatherData.forEach( (value, index) => {
-        state.savedCities[index].weather  = value.data
+        const {data} = value
+        state.savedCities[index].temp = data.main.temp
+        state.savedCities[index].temp_max = data.main.temp_max
+        state.savedCities[index].temp_min = data.main.temp_min
+        state.savedCities[index].description = data.weather[0].description
       })
     }
   };
@@ -31,6 +33,9 @@
 </script>
 <template>
   <div v-for="city in state.savedCities" :key="city.id">
-    <CityCard :city="city"/>
+    <Suspense>
+      <CityCard :city="city"/>
+    </Suspense>
+
   </div>
 </template>
