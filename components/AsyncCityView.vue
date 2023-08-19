@@ -92,16 +92,16 @@
       <p class="text-8xl mb-8">
         {{ Math.round(state.temp) }}&deg;
       </p>
-        <p>
-          Ressenti
-          {{ Math.round(state.feelsLike) }}&deg;
-        </p>
-        <p class="capitalize">
-          {{ translateWeatherDescription(state.description)  }}
-        </p>
-        <img 
-          class="w-[150px] h-auto"
-          :src="`http://openweathermap.org/img/wn/${state.icon}@2x.png`" alt="">
+      <p>
+        Ressenti
+        {{ Math.round(state.feelsLike) }}&deg;
+      </p>
+      <p class="capitalize">
+        {{ translateWeatherDescription(state.description)  }}
+      </p>
+      <img 
+        class="w-[150px] h-auto"
+        :src="`http://openweathermap.org/img/wn/${state.icon}@2x.png`" alt="">
     </div>
 
     <hr class="border-white border-opacity-10 border w-full" />
