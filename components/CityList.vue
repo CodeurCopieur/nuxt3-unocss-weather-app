@@ -28,7 +28,7 @@
   };
 
   const goToCityView = (city) => {
-    return `/weather/${city.name.toLowerCase()}?lat=${city.coords.lat}&lng=${city.coords.lng}`;
+    return `/weather/${city.name.toLowerCase()}?id=${city.id}&lat=${city.coords.lat}&lng=${city.coords.lng}`;
   }
 
   onMounted(async () => {

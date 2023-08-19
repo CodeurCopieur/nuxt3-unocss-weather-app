@@ -1,7 +1,10 @@
 <script setup>
   const route = useRoute();
+  const router = useRouter();
+
   const {name} = route.params;
   const {lat, lng} = route.query;
+
   const state = reactive({
     currentTime: null,
     temp: null,
@@ -39,6 +42,15 @@
     return wData
   }
 
+  const removeCity = () => {
+    const cities = JSON.parse(localStorage.getItem('savedCities'))
+    const updatedCities = cities.filter( city => city.id !== route.query.id)
+
+    localStorage.setItem('savedCities', JSON.stringify(updatedCities))
+
+    router.replace('/')
+  }
+
   onMounted(async () => {
 
     if (!name || !lng || !lat) {
@@ -57,6 +69,8 @@
       class="text-white p-4 bg-weather-secondary w-full text-center">
       <p>Vous êtes actuellement en train de prévisualiser cette ville, cliquez sur l'icône "+" pour commencer à suivre cette ville.</p>
     </div>
+
+    <!-- Aperçu météo -->
     <div class="flex flex-col items-center text-white py-12">
       <h1 class="text-4xl mb-2"> {{ name.toUpperCase() }}</h1>
       <p class="text-sm mb-12">
@@ -146,6 +160,15 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <div 
+      class="flex items-center gap-2 py-12 text-white cursor-pointer duration-150 hover:text-red-500"
+      @click="removeCity">
+      <Icon 
+        name="mdi-light:delete" 
+        class="text-xl hover:text-weather-secondary duration-150 cursor-pointer" />
+      <p>Supprimer la ville</p>
     </div>
   </div>
 </template>
