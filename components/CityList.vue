@@ -27,15 +27,23 @@
     }
   };
 
+  const goToCityView = (city) => {
+    return `/weather/${city.name.toLowerCase()}?lat=${city.coords.lat}&lng=${city.coords.lng}`;
+  }
+
   onMounted(async () => {
     await getCities()
   });
 </script>
 <template>
   <div v-for="city in state.savedCities" :key="city.id">
-    <Suspense>
+    <NuxtLink :to="goToCityView(city)">
       <CityCard :city="city"/>
-    </Suspense>
-
+    </NuxtLink>
   </div>
+
+  <p v-if="state.savedCities.length === 0">
+    Aucun emplacement ajouté. br
+    pour commencer à suivre un emplacement, recherchez dans le champ ci-dessus
+  </p>
 </template>
