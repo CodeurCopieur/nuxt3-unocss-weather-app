@@ -66,6 +66,10 @@
   });
 </script>
 <template>
+  <head>
+    <Title>{{ name.toUpperCase()  }} - {{ Math.round(state.temp) }}&deg; - Nuxt 3 Weatheer App</Title>
+    <Meta name="description" :content="`${translateWeatherDescription(state.description)} ${Math.round(state.temp)}&deg;`" />
+  </head>
   <template v-if="!state.isLoading">
     <div class="flex flex-col flex-1 items-center">
       <!-- Banner -->
