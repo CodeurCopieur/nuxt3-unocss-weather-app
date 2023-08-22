@@ -1,7 +1,8 @@
 <script setup>
   const state = reactive({
     savedCities: [],
-    weatherData: null
+    weatherData: null,
+    isLoading: true
   })
 
   const { getWeatherData } = useWeatherApi()
@@ -33,17 +34,27 @@
 
   onMounted(async () => {
     await getCities()
+    setTimeout(() => {
+      state.isLoading = false;
+  }, 1000);
   });
 </script>
 <template>
-  <div v-for="city in state.savedCities" :key="city.id">
-    <NuxtLink :to="goToCityView(city)">
-      <CityCard :city="city"/>
-    </NuxtLink>
-  </div>
 
-  <p v-if="state.savedCities.length === 0">
-    Aucun emplacement ajouté. br
-    pour commencer à suivre un emplacement, recherchez dans le champ ci-dessus
-  </p>
+    <template v-if="state.isLoading">
+      <CityCardSkeleton v-for="(city, i) in state.savedCities" :key="i" />
+    </template>
+    <template v-else>
+      <div v-for="city in state.savedCities" :key="city.id">
+        <NuxtLink :to="goToCityView(city)">
+          <CityCard :city="city"/>
+        </NuxtLink>
+      </div>
+
+      <p v-if="state.savedCities.length === 0">
+        Aucun emplacement ajouté. br
+        pour commencer à suivre un emplacement, recherchez dans le champ ci-dessus
+      </p>
+    </template>
+
 </template>
