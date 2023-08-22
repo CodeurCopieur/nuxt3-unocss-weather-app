@@ -7,8 +7,8 @@ export default defineNuxtConfig({
     public: {
       baseUrl: "https://api.mapbox.com/geocoding/v5/mapbox.places/",
       baseUrl2: "https://api.openweathermap.org/data/2.5/",
-      currencyKey: process.env.CURRENCY_API_KEY || process.env.API_KEY,
-      currencyKey2: process.env.CURRENCY_API_KEY2 || process.env.API_KEY2,
+      currencyKey: process.env.CURRENCY_API_KEY || process.env.CURRENCY_API_KEY,
+      currencyKey2: process.env.CURRENCY_API_KEY2 || process.env.CURRENCY_API_KEY2,
     }
   },
   modules: ['@unocss/nuxt','nuxt-icon'],
