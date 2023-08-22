@@ -1,10 +1,7 @@
-<script setup>
-  
-</script>
 <template>
   <div>
     <Suspense>
-     <AsyncCityView/>
+      <AsyncCityView/>
     </Suspense>
   </div>
 </template>
